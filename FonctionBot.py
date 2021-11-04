@@ -52,9 +52,19 @@ def botGetWithSubject(subject):
     
     info = FDB.getHomeworkWithSubject(subject)
     final = []
+    end = []
 
-    if len(info) != 0:
-        for first in info:
+    for colOne in range(0,len(info)-1):
+        year = info[colOne][0][0:4] #get the year in the string from the database
+        month = info[colOne][0][5:7]
+        day = info[colOne][0][8:10]
+        date = "{}/{}/{}".format(day, month, year) # Reogranise this
+        date = date, info[colOne][1], info[colOne][2] #Add the informations
+        end.append(date)
+        
+
+    if len(end) != 0:
+        for first in end:
             work = []
             for i in first:
                 work.append(i)

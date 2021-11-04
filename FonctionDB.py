@@ -49,19 +49,8 @@ def getHomeworkWithSubject(subject):
     
     c.execute("""SELECT date_end, subject, work FROM schoolwork WHERE subject=? and statue=0""",[subject])
     items = c.fetchall()
-    end = []
 
-
-    for colOne in range(0,len(items)-1):
-        date = items[colOne][0][0:10] , items[colOne][1], items[colOne][2]
-        end.append(date)
-
-    return end
-
-    #************** Voir si possible de faire plus solie 
-    # Pour le moment focntionnelle 
-    # Changer aussi la mise dans l'ordre des dates
-
+    return items
 
     
 
