@@ -23,10 +23,14 @@ async def on_ready():
   print('We have logged in as {0.user}'.format(client))
   change_status.start()# Start the tasks loop
 
+#--------------------------------------------------------------------
+
 # If command hi is detected
 @client.command()
 async def hi(ctx):
     await ctx.send("hi")
+
+#--------------------------------------------------------------------
 
 # If command add is detected it add the homework
 @client.command()
@@ -34,17 +38,19 @@ async def add(ctx, subject, date_end, groupe, *,work): # , *,word : take every w
     reply = FB.botAdd(subject, date_end, groupe, work)
     await ctx.send(reply)
 
+#--------------------------------------------------------------------
+
 #if command get is detected
 @client.command()
 async def get(ctx, element):
-	# If the command send is in the list
-	if element.lower() in nameClasses:
-		info = FB.botGetWithSubject(element.lower())
-  	else:
-		info = FB.botGetWithDate(element.lower())
-    
-  	await ctx.send(info)
+    if element.lower() in nameClasses:
+        info = FB.botGetWithSubject(element.lower())
+    else:
+        info = FB.botGetWithDate(element.lower())
 
+    await ctx.send(info)
+
+#--------------------------------------------------------------------
 
 #No env
 client.run("OTA0NDIwOTE5MzQ1MjkxMjk1.YX7Rng._xy7t7M2vNwWFzdl3i8DgLMd1IQ")

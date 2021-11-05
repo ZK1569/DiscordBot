@@ -73,24 +73,36 @@ def everyTime():
     current_day = datetime.datetime.now().weekday()
 
     # Change the satatue of the homework every day
-    if current_time == '08:53':
+    if current_time == '23:55':
         FDB.everyDay(now)
 
     # Send a message whith the homework for the week
     if current_day == 0: 
         if current_time == "09:00":
-            now = now.strftime("%d/%m/%y")
-            info = FDB.getHomeworkWithDate(now)
-            done = reorder(info)
-
-            return done
+            return getWeek(now)
+            
 
 #--------------------------------------------------------------------
 
+#--------------------------------------------------------------------
 
+def getWeek(now):
+    final = []
+    weekDays = ("**- Monday :**","**- Tuesday :**","**- Wednesday :**","**- Thursday :**","**- Friday :**","**- Saturday :**","**- Sunday :**")
+    for day in range(0,5):
+        end_date = now + datetime.timedelta(days=day)
 
+        end_date = end_date.strftime("%d/%m/%y")
+        info = FDB.getHomeworkWithDate(end_date)
+        
+        final.append(weekDays[day])
+        final.append(reorder(info))
+
+    final = '\n'.join(final)
+    return final
 
 #--------------------------------------------------------------------
+
 def reorder(info):
     final = []
 
@@ -110,4 +122,6 @@ def reorder(info):
         final = info
 
     return final
+
+#--------------------------------------------------------------------  
 
